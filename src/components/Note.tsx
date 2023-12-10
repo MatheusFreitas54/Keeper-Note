@@ -4,6 +4,7 @@ import styled from 'styled-components';
 type NoteProps = {
   title: string;
   content: string;
+  onDelete: () => void;
 };
 
 const TagNote = styled.div`
@@ -29,15 +30,32 @@ const TagNote = styled.div`
       white-space: pre-wrap;
       word-wrap: break-word;
     }
+
+    button {
+      background-color: #ffffff00;
+      color: #0046BB;
+      font-weight: 600 ;
+      border: none;
+      float: right;
+    }
+
+    button:hover {
+      color: #669cf8;
+    }
 `;
 
 
 const Note:React.FC<NoteProps> = (props) => {
+
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+    props.onDelete();
+  }
   
     return (
     <TagNote>
         <h1>{props.title}</h1>
         <p>{props.content}</p>
+        <button onClick={handleClick}>DELETE</button>
     </TagNote>
   )
 }
